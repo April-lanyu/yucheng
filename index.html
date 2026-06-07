@@ -2,7 +2,7 @@
 <html>
 
 <hesd>
-   <title>域界</title>
+   <title>域城图书馆</title>
 
    <link rel="stylesheet" href="style.css">
    <style>
@@ -16,58 +16,46 @@
 
 <body>
 
-   <div id="intro">
-      <div id="intro-text">
-         人类究竟依靠什么生存...
-   
-      </div>
-   </div>
 
 
-  
-<script>
+    <h1>域城图书馆</h1>
+    <p>
+        欢迎来到域城。
+    </p>
+    <h2>档案入口</h2>
 
-let step = 0;
+    <p>
+      <a href="novel/contents.html">小说</a>
+    </p>
 
-const messages = [
-    "人类究竟依靠什么生存...",
-    "真相还是叙事？",
-    "时间和空间究竟是世界的固有属性...",
-    "还是人类感知自我的方式？",
-    "这里没有真相...",
-    "只有无尽的绝望...",
-    "欢迎来到---",
-    "域城"
-   
-];
+    <p>
+      <a href="character/contents.html">人物档案</a>
+    </p>
 
-const intro = document.getElementById("intro");
-const introText = document.getElementById("intro-text");
+     <p>
+      <a href="thesis/contents.html">学者论文</a>
+    </p>
 
-intro.addEventListener("click", function() {
+    <p>
+       <a href="world/contents.html">世界观</a>
+    </p>
 
-    step++;
+    <p>
+       <a href="keting/contents.html">刻庭</a>
+    </p>
 
-   if (step < messages.length) {
+    <p>
+       <a href="guixu/contents.html">归墟派</a>
+    </p>
 
-    introText.textContent = messages[step];
+    <p>
+       <a href="diary/contents.html">作者日志</a>
+    </p>
 
-    if (step === 7) {
+    <p>
+       <a href="../index real.html">返回</a>
+    </p>
 
-    introText.style.fontSize = "80px";
 
-    introText.style.fontFamily = "";
-
-    introText.style.letterSpacing = "12px";
-}
-
-      }
-    else {
-         window.location.href = "index real.html";
-    }
-
-   });
-
-</script>
 </body>
 </html>
