@@ -50,3 +50,21 @@ body{
 .portal-button {
     margin: 20px;
 }
+
+ #intro {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+#left-text {
+  position: absolute;
+  left: 15%;
+  top: 45%;
+}
+
+#right-text {
+  position: absolute;
+  right: 15%;
+  top: 45%;
+}
