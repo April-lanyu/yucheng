@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>序章</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: "SimSun", serif;
+      cursor: pointer;
+    }
+
+    #page {
+      width: 100vw;
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 80px 10vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 22px;
+      overflow-y:auto;
+    }
+
+    .line {
+      width: 100%;
+      display: flex;
+    }
+
+    .left {
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .right {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .text {
+      max-width: 42%;
+      font-size: 22px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .fade {
+      animation: fadeIn 2.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="page"></div>
+
+  <script>
+    const pages = [
+  [
+    { side: "left", text: "你醒了啊" },
+    { side: "right", text: "我没睡呀" },
+    { side: "left", text: "你终于醒了啊" },
+    { side: "right", text: "我刚才没睡呀" },
+    { side: "left", text: "你想起来我是谁了吗" },
+    { side: "right", text: "啊？我不认识你呀" },
+    { side: "left", text: "你上次也是这样说的，看来果然是你啊" },
+    { side: "right", text: "你是谁啊？" },
+    { side: "left", text: "找到你就好，那我走了，下次再见" },
+    { side: "right", text: "好吧，下次再见" }
+  ],
+
+  [
+    { side: "left", text: "你要去哪儿" },
+    { side: "right", text: "不知道" },
+    { side: "left", text: "可是你在走路" },
+    { side: "right", text: "哦，我要去捕虫" },
+    { side: "left", text: "捕什么虫" },
+    { side: "right", text: "不知道" },
+    { side: "left", text: "那虫长什么样子？" },
+    { side: "right", text: "没看见过" },
+    { side: "left", text: "那你怎么捕呢" },
+    { side: "right", text: "站到一个特定的地方" },
+    { side: "left", text: "什么地方" },
+    { side: "right", text: "不知道" }
+  ],
+
+  [
+    { side: "left", text: "又见面了" },
+    { side: "right", text: "你好" },
+    { side: "left", text: "你想起我了吗？" },
+    { side: "right", text: "没有" },
+    { side: "left", text: "很好，捕到虫了吗？" },
+    { side: "right", text: "不知道" },
+    { side: "left", text: "不知道？" },
+    { side: "right", text: "不知道" },
+    { side: "left", text: "不知道？" },
+    { side: "right", text: "不知道" },
+    { side: "left", text: "好的，\n那你都做了什么？" },
+    { side: "right", text: "我被人带到一个地方，然后站在那里\n不动。世界变透明，过了一会儿又变\n回来，带我来的人给了我食物，又把\n我带回来。" }
+  ],
+
+  [
+    { side: "left", text: "你好" },
+    { side: "right", text: "你好" },
+    { side: "left", text: "最近过得怎么样？" },
+    { side: "right", text: "很好" },
+    { side: "left", text: "又去捕虫了吗？" },
+    { side: "right", text: "嗯，我一直在捕虫" },
+    { side: "left", text: "你还记得以前的事情吗？" },
+    { side: "right", text: "以前？" },
+    { side: "left", text: "在第一次捕虫之前" },
+    { side: "right", text: "第一次捕虫之前？" },
+    { side: "left", text: "对，第一次捕虫之前" },
+    { side: "right", text: "什么意思啊？" },
+    { side: "left", text: "哦，很高兴认识你" },
+    { side: "right", text: "你认识我吗？" }
+  ],
+
+  [
+    { side: "left", text: "你要小心一点，" },
+    { side: "right", text: "我会的" },
+    { side: "left", text: "太危险了" },
+    { side: "right", text: "不危险的，我只用站在那里" },
+    { side: "left", text: "嗯" },
+    { side: "right", text: "嗯" }
+  ],
+
+  [
+    { side: "left", text: "我想给你一个东西" },
+    { side: "right", text: "好" },
+    { side: "left", text: "给\n有没有想起来什么啊？" },
+    { side: "right", text: "这是什么？" },
+    { side: "left", text: "相晶" },
+    { side: "right", text: "不是这个，我是说这里这是什么？" },
+    { side: "left", text: "这是眼泪，你在哭" },
+    { side: "right", text: "不是这个，\n我是说心脏这里\n这是什么？" },
+    { side: "left", text: "这是...\n难过\n也许" },
+    { side: "left", text: "你有想起什么吗？" },
+    { side: "right", text: "我不知道" }
+  ],
+
+  [
+    { side: "left", text: "你好" },
+    { side: "right", text: "你好" },
+    { side: "left", text: "我们算朋友了吧" },
+    { side: "right", text: "算吧" },
+    { side: "left", text: "你是刻庭的人吗？" },
+    { side: "right", text: "应该不算吧" },
+    { side: "left", text: "行，\n我总是不能确定是不是你" },
+    { side: "right", text: "我能理解，" },
+    { side: "left", text: "你说我们到底算不算能穿梭时间的人呢？\n时间是什么？\n虽然我们可以去往任何时间，但时间在我们身体里也是线性流淌的。\n我们在线性的经历着非线性的时间，\n这很奇怪。 " },
+    
+    { side: "right", text: "哦，忘记告诉你了，我现在是捕虫司的押虫吏，算是刻庭的人了，\n我们以后是同事了。" },
+    { side: "left", text: "啊，我不是刻庭的人啊。" }
+  ],
+
+  [
+    { side: "left", text: "你应该记得我了吧？" },
+    { side: "right", text: "是的" },
+    { side: "left", text: "押运顺利吗？" },
+    { side: "right", text: "很顺利" },
+    { side: "left", text: "这次看见虫了吗？" },
+    { side: "right", text: "没有\n在盒子里\n看不见" },
+    { side: "left", text: "好吧" }
+  ],
+
+  [
+    { side: "left", text: "如果因果不在时间上积累，而在空间上积累，\n那空间会不会是另一种时间？ " },
+     { side: "right", text: "其实我现在还是很难理解时间是什么？" },
+     { side: "left", text: "我们在聊天的时候，你觉得时间有没有流淌？" },
+    { side: "right", text: "我不懂，但空间在消逝" },
+    { side: "left", text: "没错，或许时间并不是客观存在的，\n而是被创建出来的，对于变化的参考系。\n我认识了几个落客——\n你还知道落客是什么吧？" },
+    { side: "right", text: "啊，好耳熟呀，" },
+    { side: "left", text: "就是刚从人间来到这里的人" },
+    { side: "right", text: "人间啊，好耳熟呀，" },
+    { side: "left", text: "她们一直说着什么过去，将来，昨天明天" },
+    { side: "right", text: "那是什么？" },
+    { side: "left", text: "我也不知道，\n很奇怪了，落客总会说一些奇怪的东西，\n我带她们去迁刻，\n她们哭了，\n说这是在穿梭时间" },
+    { side: "right", text: "啊？我每界都在迁刻呀。" }
+  ],
+
+  [
+    { side: "left", text: "我上一卦学了一个新词" },
+    { side: "right", text: "什么" },
+    { side: "left", text: "生长" },
+    { side: "right", text: "哦，" },
+    { side: "left", text: "意思就是一个东西会变大变高，" },
+    { side: "right", text: "比如说呢，" },
+    { side: "left", text: "我也不知道\n是落客说的，\n我也没见过" },
+    { side: "right", text: "落客还说了什么？" },
+    { side: "left", text: "一个这么矮的树，会长成这么高的树。" },
+    { side: "right", text: "啊，我在换界的时候见过，明明上一界什么都没有，下一界全是大树，这是生长吗？" },
+    { side: "left", text: "我不知道\n他们还说人是从这么小长到这么大的" },
+    { side: "right", text: "啊？可是我一直都是这么大" },
+    { side: "left", text: "对了，我也这么说了，\n他们说一直就是一个时间的词，\n代表过去，曾经" },
+    { side: "right", text: "啊？一直是一个空间的词啊，代表流域太初" },
+    { side: "left", text: "对了对了，\n我开始想一些问题，越想头越痛了\n\n你说我们和落客到底是什么关系呢？\n人间和域城又是什么关系呢？" }
+  ],
+
+  [
+    { side: "left", text: "你来了" },
+    { side: "right", text: "没错" },
+    { side: "left", text: "你上次的话，让我思考了很多" },
+    { side: "right", text: "上次？" },
+    { side: "left", text: "我开始感到可怕，\n我完全无法理解自己身上在发生什么" },
+    { side: "right", text: "你在说什么？" },
+    { side: "left", text: "啊，你还记得我吗？" },
+    { side: "right", text: "不记得" },
+    { side: "left", text: "啊，你问过我这个问题，\n你记得吗？" },
+    { side: "right", text: "不记得" },
+    { side: "left", text: "你身上为什么有线？\n你去安相了？" },
+    { side: "right", text: "是的，我验针不合格，刻庭带我去安相了" },
+    { side: "left", text: "啊，\n可是我还有好多话要跟你说" },
+    { side: "right", text: "很奇怪，虽然我不认识你，\n但是我想听你说。" },
+    { side: "left", text: "我的外勤队里有两个落客，而且是没有安相的，\n我悄悄和他们聊了天，他们给我说了一个词语——记忆，\n他们说记忆就是对过去事情的储存。\n\n我突然就懂了！\n我是有过去的。\n我和你聊天就是过去！\n我们是有时间的！" },
+    { side: "right", text: "啊，这太有意思了。" },
+    { side: "left", text: "他们还告诉我，\n他们怀疑域城的刻段就是人间的时间。\n我们执行任务迁刻的地方叫做古代" },
+    { side: "right", text: "什么是古代？" },
+    { side: "left", text: "就是以前的朝代" },
+    { side: "right", text: "什么是朝代？" },
+    { side: "left", text: "就是很长的一段时间" },
+    { side: "right", text: "什么是时间？" },
+    { side: "left", text: "啊，这很难解释了\n你什么都不记得了吗\n\n可是最开始\n这一切明明都是你告诉我的呀" }
+  ],
+
+  [
+    { side: "left", text: "我们有整整两界没见了" },
+    { side: "right", text: "哦，是吗？" },
+    { side: "left", text: "我又和落客聊天了\n他们告诉我，他们的计时单位是年月日，\n他们生活的地方是一个巨大的球，球自己在转动，\n又在绕着另一个球转动，自己转一圈是一天，\n绕着另一个球转完一圈是一年。\n我当时说这不是时间啊，这是空间位置的变化，\n他们说空间的变化就是时间。\n\n我当时突然懂了！\n这么说的话，域城是有自己的时间的，\n若干息为一卦，八卦为一界，\n息为域城自己的收缩，\n每卦的空间稳定度都会变化，\n而每界更换域城里的内容，完全变化。\n这么说来的话，息卦界算不算一套计时方法？\n\n你之前说我们在线性的体验非线性的时间，\n到底是什么意思呢？\n我好像有点理解了" },
+    { side: "right", text: "抱歉，我听不懂你在说什么。" },
+    { side: "left", text: "嗯\n没事的。\n找到你就好了。\n那我们下次再见吧。" },
+    { side: "right", text: "好，\n下次再见。" }
+  ]
+];
+    const page = document.getElementById("page");
+    let currentPage = 0;
+
+    function showPage(index) {
+      page.innerHTML = "";
+
+      pages[index].forEach(item => {
+        const line = document.createElement("div");
+        line.className = "line " + item.side;
+
+        const text = document.createElement("div");
+        text.className = "text";
+        text.textContent = item.text;
+
+        line.appendChild(text);
+        page.appendChild(line);
+      });
+
+      page.classList.remove("fade");
+      void page.offsetWidth;
+      page.classList.add("fade");
+    }
+
+    showPage(currentPage);
+
+    document.addEventListener("click", function () {
+      currentPage++;
+
+      if (currentPage < pages.length) {
+        showPage(currentPage);
+      } else {
+        window.location.href = "index real.html";
+      }
+    });
+  </script>
+
+</body>
+</html>

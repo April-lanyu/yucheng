@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>域界</title>
+
+   <link rel="stylesheet" href="style.css">
+   <style>
+
+    body {
+        
+        text-align:center;
+    }
+   </style>
+</head>
+
+<body>
+
+   <div id="intro">
+      <div id="intro-text">
+         鸡在哪
+   
+      </div>
+   </div>
+
+
+  
+<script>
+
+let step = 0;
+let isTyping = false;
+let currentText = "";
+let typingTimer;
+
+const messages = [
+  "鸡在哪？",
+  "不知道",
+  "你一直这样吗？",
+  "不知道",
+  "你是谁呀",
+  "哦，你不知道我是谁呀",
+  "对呀，不知道哎"
+];
+
+const intro = document.getElementById("intro");
+const introText = document.getElementById("intro-text");
+
+function typeWriter(text) {
+  currentText = text;
+  isTyping = true;
+  introText.textContent = "";
+
+  let i = 0;
+
+  typingTimer = setInterval(function () {
+    introText.textContent = text.slice(0, i) + "_";
+    i++;
+
+    if (i > text.length) {
+      clearInterval(typingTimer);
+      introText.textContent = text;
+      isTyping = false;
+    }
+  }, 180);
+}
+
+function nextMessage() {
+  step++;
+
+  if (step < messages.length) {
+    typeWriter(messages[step]);
+  } else {
+    window.location.href = "prologue 2.html";
+  }
+}
+
+typeWriter(messages[0]);
+
+intro.addEventListener("click", function() {
+
+  if (isTyping) {
+    clearInterval(typingTimer);
+    introText.textContent = currentText;
+    isTyping = false;
+  } else {
+    nextMessage();
+  }
+
+});
+
+intro.addEventListener("contextmenu", function(event) {
+
+  event.preventDefault();
+
+  if (isTyping) return;
+
+  if (step > 0) {
+    step--;
+    typeWriter(messages[step]);
+  }
+
+});
+
+</script>
+</body>
+</html>
